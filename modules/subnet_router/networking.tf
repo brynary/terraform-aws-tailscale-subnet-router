@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-data "aws_vpc" "ecs" {
-  tags = {
-    Name = var.vpc
-  }
-}
+# data "aws_vpc" "ecs" {
+#   tags = {
+#     Name = var.vpc
+#   }
+# }
 
-data "aws_subnets" "primary" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.ecs.id]
-  }
-  tags = {
-    group = var.subnet_group
-  }
-}
+# data "aws_subnets" "primary" {
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.ecs.id]
+#   }
+#   tags = {
+#     group = var.subnet_group
+#   }
+# }

@@ -16,8 +16,8 @@ module "subnet_router" {
   source = "./modules/subnet_router"
 
   name                        = var.name
-  vpc                         = var.vpc
-  subnet_group                = var.subnet_group
+  vpc_cidr_block              = var.vpc_cidr_block
+  subnet_ids                  = var.subnet_ids
   assign_public_ip            = var.assign_public_ip
   security_group_ids          = var.security_group_ids
   target_ecs_cluster          = var.target_ecs_cluster

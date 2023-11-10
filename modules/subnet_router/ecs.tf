@@ -17,7 +17,7 @@ locals {
   tailscale_definition_path = abspath("${path.module}/container_definitions/tailscale.json")
   tailscale_container_json = templatefile(local.tailscale_definition_path, {
     hostname           = local.name
-    advertise_routes   = join(",", concat([data.aws_vpc.ecs.cidr_block], var.additional_routes))
+    advertise_routes   = join(",", concat([var.vpc_cidr_block], var.additional_routes))
     additional_flags   = var.additional_flags
     auth_key_secret_id = data.aws_secretsmanager_secret.tailscale_auth_key.id
     image_id           = "${data.aws_ecr_repository.tailscale.repository_url}@${data.aws_ecr_image.tailscale.id}"
@@ -27,8 +27,9 @@ locals {
     cpu                = var.cpu
     memory             = var.memory
   })
-  name         = var.name != null ? var.name : "${var.vpc}-tailscale"
-  service_name = var.name != null ? var.name : "tailscale"
+
+  name         = var.name
+  service_name = var.name
 }
 
 resource "aws_ecs_task_definition" "tailscale" {
@@ -84,7 +85,7 @@ resource "aws_ecs_service" "tailscale" {
   network_configuration {
     assign_public_ip = var.assign_public_ip
     security_groups  = var.security_group_ids
-    subnets          = data.aws_subnets.primary.ids
+    subnets          = var.subnet_ids
   }
 
   depends_on = [aws_efs_mount_target.primary]

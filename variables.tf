@@ -14,18 +14,27 @@
 
 variable "name" {
   type        = string
-  default     = null
-  description = "The name of the subnet router deployment. If unspecified the VPC name will be used."
+  description = "The name of the subnet router deployment."
 }
 
-variable "vpc" {
+# variable "vpc" {
+#   type        = string
+#   description = "The name of the VPC where the subnet router ECS service will be launched"
+# }
+
+variable "vpc_cidr_block" {
   type        = string
-  description = "The name of the VPC where the subnet router ECS service will be launched"
+  description = "The CIDR block of the VPC where the subnet router ECS service will be launched"
 }
 
-variable "subnet_group" {
-  type        = string
-  description = "The group (tag) of the VPC subnets where the subnet router ECS service will be launched"
+# variable "subnet_group" {
+#   type        = string
+#   description = "The group (tag) of the VPC subnets where the subnet router ECS service will be launched"
+# }
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "The IDs of the VPC subnets where the subnet router ECS service will be launched"
 }
 
 variable "assign_public_ip" {
