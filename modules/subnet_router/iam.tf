@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "ecs_task_secrets_tailscale" {
 
 resource "aws_iam_policy" "ecs_task_secrets_tailscale" {
   name        = "ecs-task-secrets-${local.name}"
-  description = "Permissions for ECS task execution to read secrets for Tailscale in VPC ${var.vpc}"
+  description = "Permissions for ECS task execution to read secrets for Tailscale"
   policy      = data.aws_iam_policy_document.ecs_task_secrets_tailscale.json
 }
 
@@ -101,7 +101,7 @@ data "aws_iam_policy_document" "ecs_task_logs_tailscale" {
 
 resource "aws_iam_policy" "ecs_task_logs_tailscale" {
   name        = "ecs-task-logs-${local.name}"
-  description = "Permissions for ECS task to write logs for Tailscale in VPC ${var.vpc}"
+  description = "Permissions for ECS task to write logs for Tailscale"
   policy      = data.aws_iam_policy_document.ecs_task_logs_tailscale.json
 }
 
